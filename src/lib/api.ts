@@ -51,3 +51,17 @@ export async function buyTicket(eventId: string): Promise<TEvent> {
 		body: JSON.stringify({ eventId }),
 	});
 }
+
+export const registerCreator = async (creatorData: any) => {
+	return fetchAPI(`register/creator`, {
+		method: 'POST',
+		body: creatorData,
+	});
+};
+
+export const registerUser = async (userData: any) => {
+	return fetchAPI(`register/attendee`, {
+		method: 'POST',
+		body: userData,
+	});
+};
