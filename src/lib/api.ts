@@ -1,15 +1,17 @@
 import { TEvent } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+console.log(API_URL);
 
 async function fetchAPI<T>(
 	endpoint: string,
 	options: RequestInit = {}
 ): Promise<T> {
-	const res = await fetch(`${API_URL}${endpoint}`, {
+	const res = await fetch(`https://eventful-service.hostless.app${endpoint}`, {
 		...options,
 		headers: {
 			'Content-Type': 'application/json',
+			Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0dGVuZGVlQGV4YW1wbGUuY29tIiwic3ViIjoiNjZiNTRlMzk5MmY3NzI0ZDk1OTdmOTBkIiwidXNlclR5cGUiOiJhdHRlbmRlZSIsImlhdCI6MTcyMzY3MTgwNiwiZXhwIjoxNzIzNzU4MjA2fQ.ck3y7Y2siawtPc0OVEBceg3VEMzjjP7VjDZc3q3rdIg`,
 			...options.headers,
 		},
 	});
@@ -44,7 +46,8 @@ export async function updateEvent(event: TEvent): Promise<TEvent> {
 }
 
 export async function buyTicket(eventId: string): Promise<TEvent> {
-	return fetchAPI(`/events/${eventId}/tickets`, {
+	return fetchAPI(`/tickets/buy-ticket`, {
 		method: 'POST',
+		body: JSON.stringify({ eventId }),
 	});
 }

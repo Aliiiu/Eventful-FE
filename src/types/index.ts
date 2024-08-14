@@ -1,10 +1,12 @@
 export interface TEvent {
 	id: string;
-	title: string;
+	name: string;
 	description: string;
-	date: string;
+	startDate: string;
+	endDate: string;
 	location: string;
 	creatorId: string;
+	image: string;
 }
 
 export interface User {
