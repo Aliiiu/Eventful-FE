@@ -24,7 +24,7 @@ export default function RootLayout({
 			<body className={urbanist.className}>
 				<Navbar />
 				{
-					<main className='flex min-h-screen flex-col items-center justify-between p-24'>
+					<main className='flex min-h-screen flex-col items-center w-full mx-auto max-w-7xl py-20 px-4 sm:px-6 lg:px-8'>
 						{children}
 					</main>
 				}

@@ -28,13 +28,13 @@ const Navbar = () => {
 						</div>
 						<div className='flex space-x-6'>
 							<Link
-								href='/dashboard'
+								href='/login'
 								className='font-medium text-gray-500 hover:text-gray-900'
 							>
 								Login
 							</Link>
 							<Link
-								href='/events'
+								href='/register'
 								className='font-medium text-gray-500 hover:text-gray-900'
 							>
 								Register
