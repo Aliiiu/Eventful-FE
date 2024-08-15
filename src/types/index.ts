@@ -15,6 +15,7 @@ export interface User {
 	name: string;
 	email: string;
 	avatar: string;
+	userType?: string;
 }
 
 export interface Ticket {

@@ -2,11 +2,13 @@
 
 import { loginUser } from '@/lib/api';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function Login() {
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 	const { register, handleSubmit, reset } = useForm({
 		mode: 'onChange',
 	});
@@ -17,6 +19,7 @@ export default function Login() {
 		localStorage.setItem('token', response.accessToken);
 		reset();
 		setLoading(false);
+		router.push('/');
 	};
 	return (
 		<div className='mx-auto max-w-md'>

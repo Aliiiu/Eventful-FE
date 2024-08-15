@@ -48,7 +48,9 @@ export default function EventDetailsPage() {
 		}
 	};
 
-	const shareUrl = `https://eventful.vercel.app/events/${event.id}`;
+	const shareUrl = `https://eventful.vercel.app/events/${
+		pathname.split('/')[2]
+	}`;
 	const title = 'Check out this event!';
 	return (
 		<div className='flex flex-col items-start w-full'>

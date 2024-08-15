@@ -1,4 +1,4 @@
-import { TEvent } from '@/types';
+import { TEvent, User } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -73,5 +73,12 @@ export const loginUser = async (
 	return fetchAPI(`/auth/login`, {
 		method: 'POST',
 		body: JSON.stringify(loginData),
+	});
+};
+
+export const validateToken = async (token: string): Promise<User> => {
+	return fetchAPI(`/auth/validate-token`, {
+		method: 'POST',
+		body: JSON.stringify({ token }),
 	});
 };
