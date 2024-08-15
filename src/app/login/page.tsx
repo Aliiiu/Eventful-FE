@@ -1,16 +1,22 @@
 'use client';
 
+import { loginUser } from '@/lib/api';
 import Link from 'next/link';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function Login() {
+	const [loading, setLoading] = useState(false);
 	const { register, handleSubmit, reset } = useForm({
 		mode: 'onChange',
 	});
 
-	const onSubmit = (data: any) => {
-		console.log(data);
+	const onSubmit = async (data: any) => {
+		setLoading(true);
+		const response: { accessToken: string } = await loginUser(data);
+		localStorage.setItem('token', JSON.stringify(response.accessToken));
 		reset();
+		setLoading(false);
 	};
 	return (
 		<div className='mx-auto max-w-md'>
@@ -51,7 +57,7 @@ export default function Login() {
 						className='bg-blue-500 hover:bg-blue-400 text-white py-1 px-4 rounded focus:outline-none focus:shadow-outline'
 						type='submit'
 					>
-						Login
+						{loading ? 'Loading...' : 'Login'}
 					</button>
 					<p className='text-sm text-gray-500'>
 						Don&apos;t have an account?{' '}

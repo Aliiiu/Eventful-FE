@@ -1,17 +1,18 @@
 import { TEvent } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-console.log(API_URL);
 
 async function fetchAPI<T>(
 	endpoint: string,
 	options: RequestInit = {}
 ): Promise<T> {
+	let token = localStorage.getItem('token');
+
 	const res = await fetch(`https://eventful-service.hostless.app${endpoint}`, {
 		...options,
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0dGVuZGVlQGV4YW1wbGUuY29tIiwic3ViIjoiNjZiNTRlMzk5MmY3NzI0ZDk1OTdmOTBkIiwidXNlclR5cGUiOiJhdHRlbmRlZSIsImlhdCI6MTcyMzY3MTgwNiwiZXhwIjoxNzIzNzU4MjA2fQ.ck3y7Y2siawtPc0OVEBceg3VEMzjjP7VjDZc3q3rdIg`,
+			Authorization: `Bearer ${token}`,
 			...options.headers,
 		},
 	});
@@ -53,15 +54,24 @@ export async function buyTicket(eventId: string): Promise<TEvent> {
 }
 
 export const registerCreator = async (creatorData: any) => {
-	return fetchAPI(`register/creator`, {
+	return fetchAPI(`/auth/register/creator`, {
 		method: 'POST',
-		body: creatorData,
+		body: JSON.stringify(creatorData),
 	});
 };
 
 export const registerUser = async (userData: any) => {
-	return fetchAPI(`register/attendee`, {
+	return fetchAPI(`/auth/register/attendee`, {
 		method: 'POST',
-		body: userData,
+		body: JSON.stringify(userData),
+	});
+};
+
+export const loginUser = async (
+	loginData: any
+): Promise<{ accessToken: string }> => {
+	return fetchAPI(`/auth/login`, {
+		method: 'POST',
+		body: JSON.stringify(loginData),
 	});
 };
