@@ -8,11 +8,11 @@ import React, { useEffect, useState } from 'react';
 
 const Navbar = () => {
 	const [role, setRole] = useState<string>();
+	const [token, setToken] = useState<string>();
 	const router = useRouter();
 
-	console.log(router);
-
 	useEffect(() => {
+		setToken(localStorage.getItem('token') || '');
 		validateToken(localStorage.getItem('token') || '')
 			.then((res) => {
 				setRole(res.userType as string);
@@ -59,7 +59,7 @@ const Navbar = () => {
 							)}
 						</div>
 						<div className='flex space-x-6'>
-							{localStorage.getItem('token') || '' ? (
+							{token || '' ? (
 								<button
 									className='font-medium text-gray-500 hover:text-gray-900'
 									onClick={handleLogout}
