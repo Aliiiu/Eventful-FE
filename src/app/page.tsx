@@ -3,7 +3,7 @@
 import EventCard from '@/components/EventCard';
 import { getEvents } from '@/lib/api';
 import { TEvent } from '@/types';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
 	const [event, setEvent] = useState<TEvent[]>([]);

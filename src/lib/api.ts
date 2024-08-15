@@ -46,10 +46,10 @@ export async function updateEvent(event: TEvent): Promise<TEvent> {
 	});
 }
 
-export async function buyTicket(eventId: string): Promise<TEvent> {
-	return fetchAPI(`/tickets/buy-ticket`, {
+export async function buyTicket(event: string): Promise<TEvent> {
+	return fetchAPI(`/ticket/buy-ticket`, {
 		method: 'POST',
-		body: JSON.stringify({ eventId }),
+		body: JSON.stringify({ event }),
 	});
 }
 

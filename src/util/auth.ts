@@ -12,10 +12,3 @@ export const useAuth = () => {
 		}
 	}, [router]);
 };
-
-export const setTokenCookie = (res: NextApiResponse, token: string) => {
-	res.setHeader(
-		'Set-Cookie',
-		`token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict`
-	);
-};

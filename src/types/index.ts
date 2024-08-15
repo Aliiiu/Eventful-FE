@@ -6,7 +6,8 @@ export interface TEvent {
 	endDate: string;
 	location: string;
 	creatorId: string;
-	image: string;
+	image?: string;
+	qrCode?: string;
 }
 
 export interface User {
