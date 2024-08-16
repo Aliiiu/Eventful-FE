@@ -1,6 +1,6 @@
 import { registerUser } from '@/lib/api';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const CreateUserForm = ({
@@ -13,12 +13,23 @@ const CreateUserForm = ({
 	const { register, handleSubmit, reset } = useForm({
 		mode: 'onChange',
 	});
+	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const onSubmit = (data: any) => {
 		data.userType = role;
-		console.log(data);
-		registerUser(data);
-		reset();
+		setLoading(true);
+		registerUser(data)
+			.then(() => {
+				reset();
+			})
+			.catch((err) => {
+				setError(true);
+				console.log(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
 	return (
 		<div className='mx-auto max-w-[650px] w-full'>
@@ -99,7 +110,7 @@ const CreateUserForm = ({
 						className='bg-blue-500 hover:bg-blue-400 text-white py-1 px-4 rounded focus:outline-none focus:shadow-outline'
 						type='submit'
 					>
-						Sign up
+						{loading ? 'Loading...' : 'Sign up'}
 					</button>
 					<p className='text-sm text-gray-500'>
 						Already have an account?{' '}

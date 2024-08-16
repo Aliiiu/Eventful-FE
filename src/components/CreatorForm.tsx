@@ -1,7 +1,7 @@
 import { registerCreator } from '@/lib/api';
 import Link from 'next/link';
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import { set, useForm } from 'react-hook-form';
 
 const CreatorForm = ({
 	role,
@@ -13,11 +13,24 @@ const CreatorForm = ({
 	const { register, handleSubmit, reset } = useForm({
 		mode: 'onChange',
 	});
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 
 	const onSubmit = (data: any) => {
 		data.userType = role;
-		console.log(data);
-		registerCreator(data);
+		setLoading(true);
+		registerCreator(data)
+			.then((res) => {
+				console.log(res);
+				reset();
+			})
+			.catch((err) => {
+				console.log(err);
+				setError(true);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 		reset();
 	};
 	return (

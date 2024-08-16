@@ -19,9 +19,9 @@ export default function Register() {
 	return (
 		<>
 			{selectRole === 'creator' ? (
-				<CreateUserForm role={selectRole} setDefaultRole={setDefaultRole} />
-			) : selectRole === 'attendee' ? (
 				<CreatorForm role={selectRole} setDefaultRole={setDefaultRole} />
+			) : selectRole === 'attendee' ? (
+				<CreateUserForm role={selectRole} setDefaultRole={setDefaultRole} />
 			) : (
 				<div className='grid grid-cols-2 gap-10'>
 					<button
